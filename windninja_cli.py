@@ -766,7 +766,7 @@ def testWN(init_method: str,
 
 if __name__ == '__main__':
     if len(sys.argv) != 4:
-        print('Four parameters are required to test the WindNinja CLI')
+        print('Four parameters are required to use the WindNinja CLI test datasets')
         sys.exit(1)
 
     # Get input parameters from the console
