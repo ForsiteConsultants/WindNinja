@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windninja_cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/windninja_cli.py" afterDir="false" />
-    </list>
+    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Changed names of input parameters for console execution" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,6 +62,19 @@
       <option name="presentableId" value="Default" />
       <updated>1713303335033</updated>
     </task>
+    <task id="LOCAL-00001" summary="Changed names of input parameters for console execution">
+      <option name="closed" value="true" />
+      <created>1713303638416</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713303638416</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Changed names of input parameters for console execution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed names of input parameters for console execution" />
   </component>
 </project>
