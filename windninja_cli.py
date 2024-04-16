@@ -770,7 +770,7 @@ if __name__ == '__main__':
         sys.exit(1)
 
     # Get input parameters from the console
-    init, time, out_path, threads = sys.argv
+    method, time, out_path, threads = sys.argv
 
     # Create the output folder if it doesn't exist
     if not os.path.exists(out_path):
@@ -781,7 +781,7 @@ if __name__ == '__main__':
     daily_outFolder = os.path.join(test_folder, 'Daily')
     hourly_outFolder = os.path.join(test_folder, 'Hourly')
 
-    testWN(init_method=init,
+    testWN(init_method=method,
            time_scale=time,
            out_folder=out_path,
            num_threads=threads)
