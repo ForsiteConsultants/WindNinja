@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Changed names of input parameters for console execution">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Reference_Data/WindNinja_CLI_Example.py" afterDir="false" />
+    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windninja_cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/windninja_cli.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,34 +16,34 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "gagreene"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;gagreene&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/gagreene/WindNinja.git",
-    "accountId": "3abc1f3b-c5b2-4284-85be-47c6fdb98af9"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/gagreene/WindNinja.git&quot;,
+    &quot;accountId&quot;: &quot;3abc1f3b-c5b2-4284-85be-47c6fdb98af9&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2fCRzNc0CjWuc22Fkx4LziYAhDL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/ggreene/PycharmProjects/WindNinja"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ggreene/PycharmProjects/WindNinja&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ggreene\PycharmProjects\WindNinja" />
@@ -79,7 +77,23 @@
       <option name="project" value="LOCAL" />
       <updated>1713303638416</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py">
+      <option name="closed" value="true" />
+      <created>1713304784402</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713304784402</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py">
+      <option name="closed" value="true" />
+      <created>1713304799390</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1713304799390</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed names of input parameters for console execution" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed names of input parameters for console execution" />
+    <MESSAGE value="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py" />
   </component>
 </project>

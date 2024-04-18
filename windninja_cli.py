@@ -19,7 +19,7 @@ def setWN_path(new_path: str) -> None:
     :param new_path: Path to the WindNinja directory
     :return: None
     """
-    wn_yaml_path = 'windninja_path.yml'
+    wn_yaml_path = os.path.join(os.path.dirname(__file__), 'windninja_path.yml')
 
     # Open wn_yaml
     with open(wn_yaml_path, 'r') as file:
@@ -46,7 +46,7 @@ def getWN_path() -> str:
     Function to read the windninja.yml and return the current WindNinja path
     :return: wn_path from windninja.yml
     """
-    wn_yaml_path = 'windninja_path.yml'
+    wn_yaml_path = os.path.join(os.path.dirname(__file__), 'windninja_path.yml')
 
     # Open wn_yaml
     with open(wn_yaml_path, 'r') as file:
@@ -707,22 +707,24 @@ class WN:
 
 
 def testWN(init_method: str,
-           time_scale: str,
            out_folder: str,
+           time_scale: str = None,
+           vegetation: str = None,
            num_threads: int = 1) -> None:
     """
     Function to test the windninja CLI with the windninja Python module
     :param init_method: Method of windninja modelling to test, using the default windninja testing datasets.
         Options include: "domainAverageInitialization", "pointInitialization",
         "wxModelInitialization", "griddedInitialization"
+    :param vegetation: Vegetation type to use for WindNinja modelling ('grass', 'brush', 'trees')
     :param time_scale: Timescale to use for pointInitialization
     :param num_threads: Number of CPU threads to use during the simulation
     :return: None
     """
 
     # Get WindNinja example data
-    wn_exampleFolder = os.path.join(getWN_path(), r'\etc\windninja\example-files')
-    print(getWN_path())
+    wn_exampleFolder = os.path.join(getWN_path(), r'etc\windninja\example-files')
+
     if init_method == 'pointInitialization':
         elev_data = os.path.join(wn_exampleFolder, 'missoula_valley.tif')
         if time_scale == 'daily':
@@ -734,6 +736,7 @@ def testWN(init_method: str,
                 output_path=out_folder,
                 elevation_file=elev_data,
                 initialization_method=init_method,
+                vegetation=vegetation,
                 fetch_type='stid',
                 wx_station_filename=wx_station_file_daily,
                 time_zone='auto-detect',
@@ -754,6 +757,7 @@ def testWN(init_method: str,
                 output_path=out_folder,
                 elevation_file=elev_data,
                 initialization_method=init_method,
+                vegetation=vegetation,
                 fetch_type='stid',
                 wx_station_filename=wx_station_file_hourly,
                 time_zone='auto-detect',
@@ -772,7 +776,6 @@ def testWN(init_method: str,
                 output_wind_height=10.0,
                 units_output_wind_height='m',
                 output_speed_units='kph',
-                vegetation='brush',
                 mesh_choice='fine',
                 # write_wx_model_shapefile_output='true',
                 # write_shapefile_output='true',
@@ -793,6 +796,7 @@ def testWN(init_method: str,
             output_path=out_folder,
             elevation_file=elev_data,
             initialization_method=init_method,
+            vegetation=vegetation,
             time_zone='auto-detect',
             input_dir_grid=wd_grid,
             input_speed_grid=ws_grid,
@@ -811,20 +815,52 @@ def testWN(init_method: str,
 
 
 if __name__ == '__main__':
-    print(sys.argv)
-    if len(sys.argv[1:]) != 4:
-        print('Five parameters are required to use the WindNinja CLI test datasets')
+    if len(sys.argv[1:]) != 3:
+        print('Three parameters are required to test the WindNinja CLI: [num_threads, vegetation, out_path]')
         sys.exit(1)
 
     # Get input parameters from the console
-    method, time, out_path, threads = sys.argv[1:]
+    threads, veg, out_path = sys.argv[1:]
 
     # Create the output folder if it doesn't exist
     if not os.path.exists(out_path):
         os.mkdir(out_path)
 
-    # Test the WindNinja CLI
-    testWN(init_method=method,
-           time_scale=time,
-           out_folder=out_path,
+    # Create daily pointInitialization folder
+    print('Testing pointInitialization with daily weather data')
+    daily_pointInit = os.path.join(out_path, 'pointInitialization_Daily')
+    if not os.path.exists(daily_pointInit):
+        os.mkdir(daily_pointInit)
+
+    # Test daily pointInitialization with the WindNinja CLI
+    testWN(init_method='pointInitialization',
+           out_folder=daily_pointInit,
+           time_scale='daily',
+           vegetation=veg,
+           num_threads=threads)
+
+    # Create hourly pointInitialization folder
+    print('Testing pointInitialization with hourly weather data')
+    hourly_pointInit = os.path.join(out_path, 'pointInitialization_Hourly')
+    if not os.path.exists(hourly_pointInit):
+        os.mkdir(hourly_pointInit)
+
+    # Test hourly pointInitialization with the WindNinja CLI
+    testWN(init_method='pointInitialization',
+           out_folder=hourly_pointInit,
+           time_scale='hourly',
+           vegetation=veg,
+           num_threads=threads)
+
+    # Create griddedInitialization folder
+    print('Testing griddedInitialization with gridded wind data')
+    gridInit = os.path.join(out_path, 'griddedInitialization')
+    if not os.path.exists(gridInit):
+        os.mkdir(gridInit)
+
+    # Test griddedInitialization with the WindNinja CLI
+    testWN(init_method='griddedInitialization',
+           out_folder=gridInit,
+           time_scale=None,
+           vegetation=veg,
            num_threads=threads)
