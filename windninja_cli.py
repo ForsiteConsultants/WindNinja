@@ -402,8 +402,8 @@ class WN:
         # ### CONFIRM BASIC WINDNINJA REQUIREMENTS
         if any([self.elevation_file, self.initialization_method, self.output_wind_height,
                self.units_output_wind_height, self.vegetation]) is None:
-                raise Exception('Parameters "elevation_file", "initialization_method", "output_wind_height", '
-                                '"units_output_wind_height", and "vegetation" are required inputs for WindNinja')
+            raise ValueError('Parameters "elevation_file", "initialization_method", "output_wind_height", '
+                             '"units_output_wind_height", and "vegetation" are required inputs for WindNinja')
 
         # ### SET OUTPUT_PATH IF NOT DEFINED
         if self.output_path is None:
@@ -414,34 +414,34 @@ class WN:
         if self.initialization_method == 'domainAverageInitialization':
             if any([self.input_speed, self.input_speed_units, self.input_direction,
                     self.input_wind_height, self.units_input_wind_height]) is None:
-                raise Exception('Parameters "input_speed", "input_speed_units", "input_direction", '
-                                '"input_wind_height", and "units_input_wind_height" are required inputs for '
-                                'initialization_method == "domainAverageInitialization"')
+                raise ValueError('Parameters "input_speed", "input_speed_units", "input_direction", '
+                                 '"input_wind_height", and "units_input_wind_height" are required inputs for '
+                                 'initialization_method == "domainAverageInitialization"')
         # Point Initialization
         elif self.initialization_method == 'pointInitialization':
             if self.fetch_type is None:
-                raise Exception('Parameter "fetch_type" is a required input for '
-                                'initialization_method == "pointInitialization"')
+                raise ValueError('Parameter "fetch_type" is a required input for '
+                                 'initialization_method == "pointInitialization"')
             elif self.fetch_type.lower() not in ['stid', 'bbox']:
-                raise Exception('Parameter "fetch_type" must be either "stid" or "bbox"')
+                raise ValueError('Parameter "fetch_type" must be either "stid" or "bbox"')
             elif self.fetch_type.lower() == 'stid':
                 if self.wx_station_filename is None:
-                    raise Exception('Parameter "wx_station_filename" is a required input for '
-                                    'initialization_method == "pointInitialization"')
+                    raise ValueError('Parameter "wx_station_filename" is a required input for '
+                                     'initialization_method == "pointInitialization"')
             else:
                 if self.fetch_station in [None, False]:
-                    raise Exception('Parameter "fetch_station" should be "True" '
-                                    'if parameter "fetch_type" == "bbox"')
+                    raise ValueError('Parameter "fetch_station" should be "True" '
+                                     'if parameter "fetch_type" == "bbox"')
         # Wx Model Initialization
         elif self.initialization_method == 'wxModelInitialization':
             if any([self.wx_model_type, self.forecast_duration]) is None:
-                raise Exception('Parameters "wx_model_type" and "forecast_duration" are required inputs for '
-                                'initialization_method == "wxModelInitialization"')
+                raise ValueError('Parameters "wx_model_type" and "forecast_duration" are required inputs for '
+                                 'initialization_method == "wxModelInitialization"')
         # Gridded Initialization
         elif self.initialization_method == 'griddedInitialization':
             if any([self.input_speed_grid, self.input_dir_grid]) is None:
-                raise Exception('Parameters "input_speed_grid" and "input_dir_grid" are required inputs for '
-                                'initialization_method == "griddedInitialization"')
+                raise ValueError('Parameters "input_speed_grid" and "input_dir_grid" are required inputs for '
+                                 'initialization_method == "griddedInitialization"')
             # elif any([self.input_speed_grid.split('.')[-1], self.input_dir_grid.split('.')[-1]]) != 'asc':
             #     raise Exception('Parameters "input_speed_grid" and "input_dir_grid" must be in "AAIGrid" format')
 
