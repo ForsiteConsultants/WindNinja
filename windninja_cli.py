@@ -43,7 +43,7 @@ def setWN_path(new_path: str) -> None:
 
 def getWN_path() -> str:
     """
-    Function to read the windninja.yml and return the current windninja path
+    Function to read the windninja.yml and return the current WindNinja path
     :return: wn_path from windninja.yml
     """
     wn_yaml_path = 'windninja_path.yml'
@@ -722,29 +722,65 @@ def testWN(init_method: str,
 
     # Get WindNinja example data
     wn_exampleFolder = os.path.join(getWN_path(), r'\etc\windninja\example-files')
+    print(getWN_path())
     if init_method == 'pointInitialization':
         elev_data = os.path.join(wn_exampleFolder, 'missoula_valley.tif')
         if time_scale == 'daily':
             wx_station_file_daily = os.path.join(wn_exampleFolder,
                                                  'WXSTATIONS-2018-06-25-1237-missoula_valley',
                                                  'KMSO-2018-06-25_1237-0.csv')
-            processWN(
+            WN(
                 num_threads=num_threads,
-                init_method='pointInitialization',
                 output_path=out_folder,
                 elevation_file=elev_data,
-                wx_station_filename=wx_station_file_daily
-            )
+                initialization_method=init_method,
+                fetch_type='stid',
+                wx_station_filename=wx_station_file_daily,
+                time_zone='auto-detect',
+                match_points=True,
+                output_wind_height=10.0,
+                units_output_wind_height='m',
+                output_speed_units='kph',
+                mesh_choice='fine',
+                write_ascii_output=True,
+                write_farsite_atm=False
+            ).runWN()
         elif time_scale == 'hourly':
             wx_station_file_hourly = os.path.join(wn_exampleFolder,
                                                   'WXSTATIONS-MDT-2018-06-20-2128-2018-06-21-2128-missoula_valley',
                                                   'KMSO-MDT-2018-06-20_2128-2018-06-21_2128-0.csv')
-            processWN(
-                init_method='pointInitialization',
-                output_path=hourly_outFolder,
+            WN(
+                num_threads=num_threads,
+                output_path=out_folder,
                 elevation_file=elev_data,
-                wx_station_filename=wx_station_file_hourly
-            )
+                initialization_method=init_method,
+                fetch_type='stid',
+                wx_station_filename=wx_station_file_hourly,
+                time_zone='auto-detect',
+                match_points=True,
+                start_year=2018,
+                start_month=6,
+                start_day=21,
+                start_hour=2,
+                start_minute=30,
+                stop_year=2018,
+                stop_month=6,
+                stop_day=22,
+                stop_hour=4,
+                stop_minute=25,
+                number_time_steps=10,
+                output_wind_height=10.0,
+                units_output_wind_height='m',
+                output_speed_units='kph',
+                vegetation='brush',
+                mesh_choice='fine',
+                # write_wx_model_shapefile_output='true',
+                # write_shapefile_output='true',
+                # shape_out_resolution=-1,
+                # units_shape_out_resolution='m',
+                write_ascii_output=True,
+                write_farsite_atm=True
+            ).runWN()
     elif init_method == 'griddedInitialization':
         elev_data = os.path.join(wn_exampleFolder,
                                  'griddedInitialization_example\\big_butte_small.tif')
@@ -752,35 +788,42 @@ def testWN(init_method: str,
                                'griddedInitialization_example\\big_butte_small_0_2_123m_vel.asc')
         wd_grid = os.path.join(wn_exampleFolder,
                                'griddedInitialization_example\\big_butte_small_0_2_123m_ang.asc')
-        processWN(
+        WN(
             num_threads=num_threads,
-            init_method='griddedInitialization',
             output_path=out_folder,
             elevation_file=elev_data,
-            ws_grid=ws_grid,
-            wd_grid=wd_grid
-        )
+            initialization_method=init_method,
+            time_zone='auto-detect',
+            input_dir_grid=wd_grid,
+            input_speed_grid=ws_grid,
+            input_speed_units='kph',
+            input_wind_height=10,
+            units_input_wind_height='m',
+            output_speed_units='kph',
+            output_wind_height=10,
+            units_output_wind_height='m',
+            mesh_choice='fine',
+            write_ascii_output=True,
+            write_farsite_atm=False
+        ).runWN()
 
     return
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 4:
-        print('Four parameters are required to use the WindNinja CLI test datasets')
+    print(sys.argv)
+    if len(sys.argv[1:]) != 4:
+        print('Five parameters are required to use the WindNinja CLI test datasets')
         sys.exit(1)
 
     # Get input parameters from the console
-    method, time, out_path, threads = sys.argv
+    method, time, out_path, threads = sys.argv[1:]
 
     # Create the output folder if it doesn't exist
     if not os.path.exists(out_path):
         os.mkdir(out_path)
 
-    # Get daily and hourly testing folders
-    test_folder = r'S:\1041\8\03_MappingAnalysisData\02_Data\03_WindNinja_Testing'
-    daily_outFolder = os.path.join(test_folder, 'Daily')
-    hourly_outFolder = os.path.join(test_folder, 'Hourly')
-
+    # Test the WindNinja CLI
     testWN(init_method=method,
            time_scale=time,
            out_folder=out_path,
