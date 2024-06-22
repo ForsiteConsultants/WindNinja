@@ -11,6 +11,7 @@ import sys
 import yaml
 import traceback
 import subprocess
+from typing import Union, Optional
 
 
 def setWN_path(new_path: str) -> None:
@@ -447,7 +448,7 @@ class WN:
 
         return
 
-    def getParams(self, params: str | list[str] = None) -> None:
+    def getParams(self, params: Optional[Union[str, list[str]]] = None) -> None:
         param_dict = {
             'wn_path': self.wn_path,
             'elevation_file': self.elevation_file,
