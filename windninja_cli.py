@@ -9,6 +9,7 @@ __author__ = ['Gregory A. Greene, map.n.trowel@gmail.com']
 import os
 import sys
 import yaml
+import csv
 import traceback
 import subprocess
 from typing import Union, Optional
@@ -60,6 +61,83 @@ def getWN_path() -> str:
     return wn_yaml['wn_path']
 
 
+def genWxStnFile(out_folder: str,
+                 file_name: str,
+                 stn_vars: list,
+                 append: bool = False):
+    """
+    Function to generate a WindNinja station file.
+    :param out_folder: output folder to save the station file
+    :param file_name: name of the station file
+    :param stn_vars: list of station variables to add to the station file
+    :param append: option to append new data to an existing station file
+    :return: the full file path to the output station file
+    **stn_vars**
+        stn_id: str
+            Name of the station
+        projection: str
+            The type of projection used by the elevation dataset. Options: "PROJCS", "GEOGCS"
+        datum: str
+            The datum used by the elevation dataset. Options: "WGS84", "NAD83", "NAD27"
+        lat/YCoord: float
+            The latitude or Y-coordinate of the station location
+        lon/XCoord: float
+            The longitude or X-coordinate of the station location
+        wind_ht: float
+            The height of the wind observation
+        wind_ht_units: str
+            The units of the wind height observation. Options: "meters", "feet"
+        wind_spd: float
+            The observed wind speed
+        wind_spd_units: str
+            Units of the observed wind speed. Options: "mph", "kph", "mps", "kts"
+        wind_dir: float
+            The observed wind direction (direction wind is coming from) in degrees
+        temperature: float
+            The temperature observed at the weather station
+        temp_units: str
+            The units of the observed temperature. Options: "F", "C"
+        cloud_cover: float
+            The percentage of cloud cover as observed at the location of the weather station. Range: 0-100
+        radius_inf: float
+            The radius of influence applied to the weather station. Use -1 if no radius of influence is applied.
+        radius_inf_units: str
+            The units of the radius of influence. Options: "miles", "feet", "meters", "km"
+        date_time: str
+            The date and time of the weather observation. Format: YYYY-MM-DDTHH:mm:ssZ
+            Where Y is year, M is month, D is day, H is hour, m is minute, s is second.
+            T and Z are required filler characters.
+            Leave this value blank ("") for a single weather observation.
+    """
+    if not append:
+        print('Writing new station file...')
+    else:
+        print('Appending data to existing station file')
+    stnData = [('Station_Name', 'Coord_Sys(PROJCS,GEOGCS)', 'Datum(WGS84,NAD83,NAD27)',
+                'Lat/YCoord', 'Lon/XCoord', 'Height', 'Height_Units(meters,feet)',
+                'Speed', 'Speed_Units(mph,kph,mps,kts)', 'Direction(degrees)', 'Temperature',
+                'Temperature_Units(F,C)', 'Cloud_Cover(%)',
+                'Radius_of_Influence', 'Radius_of_Influence_Units(miles,feet,meters,km)', 'date_time'),
+               stn_vars]
+
+    def _tableToCSV(input_tbl, csv_filepath):
+        with open(csv_filepath, 'w', newline='') as csvFile:
+            csv_out = csv.writer(csvFile, delimiter=',')
+            csv_out.writerows(input_tbl)
+            # for row in input_tbl:
+            #    csv_out.writerow(row)
+        csvFile.close()
+
+    # Get path to weather station csv file
+    csv_path = f'{out_folder}\\{file_name}_WxStationFile.csv'
+
+    if os.path.exists(csv_path):
+        os.remove(csv_path)
+    _tableToCSV(stnData, csv_path)
+
+    return csv_path
+
+
 class WN:
     """
     Class for WindNinja modelling
@@ -68,7 +146,8 @@ class WN:
 
     :params:
     --num_threads (=1)                  number of threads to use during simulation\n
-    --elevation_file                    input elevation path/filename (*.asc, *.lcp, *.tif, *.img)\n
+    --elevation_file                    input elevation path/filename (*.asc, *.lcp, *.tif, *.img).
+                                        If using an LCP file, there is no need to enter a value for vegetation.\n
     --fetch_elevation                   download an elevation file from an internet server and save to path/filename\n
     --north                             north extent of elevation file bounding box to download\n
     --east                              east extent of elevation file bounding box to download\n
@@ -219,6 +298,7 @@ class WN:
     --mesh_count                        number of cells in the mesh\n
     --turbulence_output_flag (=0)       write turbulence output (true, default:false)\n
     """
+
     def __init__(
             self,
             num_threads: int = None,
@@ -402,7 +482,7 @@ class WN:
 
         # ### CONFIRM BASIC WINDNINJA REQUIREMENTS
         if any([self.elevation_file, self.initialization_method, self.output_wind_height,
-               self.units_output_wind_height, self.vegetation]) is None:
+                self.units_output_wind_height, self.vegetation]) is None:
             raise ValueError('Parameters "elevation_file", "initialization_method", "output_wind_height", '
                              '"units_output_wind_height", and "vegetation" are required inputs for WindNinja')
 
@@ -448,7 +528,7 @@ class WN:
 
         return
 
-    def getParams(self, params: Optional[Union[str, list[str]]] = None) -> None:
+    def getParams(self, params: Optional[Union[str, list[str]]] = None) -> Union[list, int, float, str, None]:
         param_dict = {
             'wn_path': self.wn_path,
             'elevation_file': self.elevation_file,
@@ -567,7 +647,6 @@ class WN:
         else:
             self.used_params = [(key, val) for key, val in param_dict.items()
                                 if (val is not None) and (key != 'wn_path')]
-
             return
 
     # =============================================================================
