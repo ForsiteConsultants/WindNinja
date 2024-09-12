@@ -692,10 +692,12 @@ class WN:
         return
 
     def runWN(self) -> None:
+        print('<<<<< Running WindNinja >>>>>')
         self.verifyInputs()
         self.getParams()
         self.writeCFG()
         self.execWN_cli()
+        print('<<<<< WindNinja modelling complete >>>>>')
 
 
 def testWN(init_method: str,
