@@ -164,7 +164,7 @@ class WN:
     --elevation_source (=us_srtm)           source for downloading elevation data
                                             (default:us_srtm, world_srtm, gmted, lcp)\n
     --initialization_method             initialization method (domainAverageInitialization, pointInitialization,
-                                        wxModelInitialization)\n
+                                        griddedInitialization, wxModelInitialization)\n
     --time_zone                         time zone (common choices are: America/New_York, America/Chicago,
                                         America/Denver, America/Phoenix, America/Los_Angeles, America/Anchorage;
                                         use 'auto-detect' to try and find the time zone for the dem. All choices are
@@ -478,7 +478,7 @@ class WN:
         self.turbulence_output_flag = turbulence_output_flag
 
     def verifyInputs(self) -> None:
-        print('\nVerifying input parameters...')
+        print('Verifying input parameters...')
 
         # ### CONFIRM BASIC WINDNINJA REQUIREMENTS
         if any([self.elevation_file, self.initialization_method, self.output_wind_height,
@@ -673,7 +673,7 @@ class WN:
     # =============================================================================
     def execWN_cli(self) -> None:
         try:
-            print('Running WindNinja...')
+            print('Running WindNinja CLI command...')
             wn = subprocess.Popen(
                 [os.path.join(self.wn_path, 'bin\\WindNinja_cli'), f'{self.output_path}\\windninja.cfg'],
                 stdout=subprocess.PIPE
@@ -692,7 +692,7 @@ class WN:
         return
 
     def runWN(self) -> None:
-        print('<<<<< Running WindNinja >>>>>')
+        print('\n<<<<< Running WindNinja >>>>>')
         self.verifyInputs()
         self.getParams()
         self.writeCFG()
