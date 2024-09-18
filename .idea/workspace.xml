@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Added print statements to runWN() function">
+    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Adjusted print statements throughout module">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/windninja_cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/windninja_cli.py" afterDir="false" />
     </list>
@@ -110,7 +110,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726183435077</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Adjusted print statements throughout module">
+      <option name="closed" value="true" />
+      <created>1726187934406</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726187934406</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +137,7 @@
     <MESSAGE value="Added Reference_Data folder containing Natalie Wagenbrenner's WindNinja_CLI_Example.py" />
     <MESSAGE value="Added genWxStnFile() function to windninja_cli.py" />
     <MESSAGE value="Added print statements to runWN() function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added print statements to runWN() function" />
+    <MESSAGE value="Adjusted print statements throughout module" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted print statements throughout module" />
   </component>
 </project>

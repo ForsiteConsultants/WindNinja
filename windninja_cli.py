@@ -146,6 +146,8 @@ class WN:
 
     :params:
     --num_threads (=1)                  number of threads to use during simulation\n
+    --cfg_name                          unique name for the config file ("_windninja.cfg" will be appended to name)
+    --suppress_message                  if True, do not print any messages from this class
     --elevation_file                    input elevation path/filename (*.asc, *.lcp, *.tif, *.img).
                                         If using an LCP file, there is no need to enter a value for vegetation.\n
     --fetch_elevation                   download an elevation file from an internet server and save to path/filename\n
@@ -302,6 +304,8 @@ class WN:
     def __init__(
             self,
             num_threads: int = None,
+            cfg_name: str = None,
+            suppress_messages: bool = False,
             elevation_file: str = None, fetch_elevation: bool = None,
             north: float = None, east: float = None, south: float = None, west: float = None,
             x_center: float = None, y_center: float = None,
@@ -369,6 +373,8 @@ class WN:
             turbulence_output_flag: bool = None
     ):
         self.wn_path = getWN_path()
+        self.cfg_name = cfg_name
+        self.suppress_messages = suppress_messages
         self.used_params = None
         self.num_threads = num_threads
         self.elevation_file = elevation_file
@@ -478,7 +484,8 @@ class WN:
         self.turbulence_output_flag = turbulence_output_flag
 
     def verifyInputs(self) -> None:
-        print('Verifying input parameters...')
+        if not self.suppress_messages:
+            print('Verifying input parameters...')
 
         # ### CONFIRM BASIC WINDNINJA REQUIREMENTS
         if any([self.elevation_file, self.initialization_method, self.output_wind_height,
@@ -653,15 +660,13 @@ class WN:
     #   Write WindNinja cfg file
     # =============================================================================
     def writeCFG(self) -> None:
-        print('Writing WindNinja config file...')
+        if not self.suppress_messages:
+            print('Writing WindNinja config file...')
 
-        try:
-            if os.path.exists(f'{self.output_path}\\windninja.cfg'):
-                os.remove(f'{self.output_path}\\windninja.cfg')
-        except:
-            pass
+        if os.path.exists(f'{self.output_path}\\{self.cfg_name}_windninja.cfg'):
+            os.remove(f'{self.output_path}\\{self.cfg_name}_windninja.cfg')
 
-        with open(f'{self.output_path}\\windninja.cfg', 'w') as fout:
+        with open(f'{self.output_path}\\{self.cfg_name}_windninja.cfg', 'w') as fout:
             for param, val in self.used_params:
                 # output not written in order for wx files if num_threads > 1
                 fout.write(f'{param} = {val}\n')
@@ -673,13 +678,16 @@ class WN:
     # =============================================================================
     def execWN_cli(self) -> None:
         try:
-            print('Running WindNinja CLI command...')
-            wn = subprocess.Popen(
-                [os.path.join(self.wn_path, 'bin\\WindNinja_cli'), f'{self.output_path}\\windninja.cfg'],
-                stdout=subprocess.PIPE
-            )
+            if not self.suppress_messages:
+                print('Running WindNinja CLI command...')
+            wn = subprocess.Popen([os.path.join(self.wn_path, 'bin\\WindNinja_cli'),
+                                   f'{self.output_path}\\{self.cfg_name}_windninja.cfg'],
+                                  stdout=subprocess.PIPE
+                                  )
             out, err = wn.communicate()
-            print(out)
+
+            if not self.suppress_messages:
+                print(out)
         except:
             # Get the traceback object
             tb = sys.exc_info()[2]
@@ -692,12 +700,14 @@ class WN:
         return
 
     def runWN(self) -> None:
-        print('\n<<<<< Running WindNinja >>>>>')
+        if not self.suppress_messages:
+            print('\n<<<<< Running WindNinja >>>>>')
         self.verifyInputs()
         self.getParams()
         self.writeCFG()
         self.execWN_cli()
-        print('<<<<< WindNinja modelling complete >>>>>')
+        if not self.suppress_messages:
+            print('<<<<< WindNinja modelling complete >>>>>')
 
 
 def testWN(init_method: str,
