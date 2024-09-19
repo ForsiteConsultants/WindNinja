@@ -147,7 +147,7 @@ class WN:
     :params:
     --num_threads (=1)                  number of threads to use during simulation\n
     --cfg_name                          unique name for the config file ("_windninja.cfg" will be appended to name)
-    --suppress_message                  if True, do not print any messages from this class
+    --suppress_messages                 if True, do not print any messages from this class
     --elevation_file                    input elevation path/filename (*.asc, *.lcp, *.tif, *.img).
                                         If using an LCP file, there is no need to enter a value for vegetation.\n
     --fetch_elevation                   download an elevation file from an internet server and save to path/filename\n
