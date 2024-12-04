@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Adjusted print statements throughout module">
+    <list default="true" id="a04b429a-e7d3-482c-ade7-b3d95005116e" name="Changes" comment="Added README file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windninja_cli.py" beforeDir="false" afterPath="$PROJECT_DIR$/windninja_cli.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,19 +36,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ggreene/PycharmProjects/PICS_CBM_FuelModelling&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/ggreene/PycharmProjects/US_FireModelling_Automation",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ggreene\PycharmProjects\WindNinja" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ggreene\PycharmProjects\WindNinja" />
       <recent name="C:\Users\ggreene\PycharmProjects\WindNinja\Experimental_Data" />
       <recent name="C:\Users\ggreene\PycharmProjects\WindNinja\Reference_Data" />
     </key>
@@ -57,7 +57,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
       </set>
     </attachedChunks>
   </component>
@@ -118,7 +118,23 @@
       <option name="project" value="LOCAL" />
       <updated>1726187934406</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Revised print statements;&#10;Added a suppress_messages option to prevent the WN class from printing messages while running">
+      <option name="closed" value="true" />
+      <created>1726687320881</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726687320881</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added README file">
+      <option name="closed" value="true" />
+      <created>1731120076334</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731120076334</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -138,6 +154,8 @@
     <MESSAGE value="Added genWxStnFile() function to windninja_cli.py" />
     <MESSAGE value="Added print statements to runWN() function" />
     <MESSAGE value="Adjusted print statements throughout module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted print statements throughout module" />
+    <MESSAGE value="Revised print statements;&#10;Added a suppress_messages option to prevent the WN class from printing messages while running" />
+    <MESSAGE value="Added README file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added README file" />
   </component>
 </project>
